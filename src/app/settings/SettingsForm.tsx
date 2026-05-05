@@ -99,8 +99,8 @@ export default function SettingsForm() {
         <section className="bg-white rounded-xl p-6 shadow-sm">
           <h2 className="text-lg font-semibold mb-1">Domain Configuration</h2>
           <p className="text-sm text-gray-500 mb-4">
-            Enter the domain you purchased (e.g. from Wix). Supports any TLD — .com, .org, .io, etc.
-            Once saved, all generated websites will dynamically use this domain.
+            Default domain settings. These apply to any generated site that doesn&apos;t have its own per-site configuration.
+            Use the &quot;Configure&quot; button on each site card for per-site overrides.
           </p>
           <div className="space-y-4">
             <div>

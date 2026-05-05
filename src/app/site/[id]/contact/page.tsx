@@ -6,7 +6,7 @@ import ContactForm from "@/components/ContactForm";
 
 export default async function ContactPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
-  const [site, domainConfig] = await Promise.all([getSiteData(id), getDomainConfig()]);
+  const [site, domainConfig] = await Promise.all([getSiteData(id), getDomainConfig(id)]);
   if (!site) notFound();
 
   const { palette } = site;
@@ -42,7 +42,7 @@ export default async function ContactPage({ params }: { params: Promise<{ id: st
             </div>
 
             <div>
-              <ContactForm palette={palette} />
+              <ContactForm palette={palette} generationId={id} />
             </div>
           </div>
         </div>

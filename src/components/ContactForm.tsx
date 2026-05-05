@@ -4,9 +4,10 @@ import { useState } from "react";
 
 interface ContactFormProps {
   palette: { primary: string; bg: string; text: string };
+  generationId?: string;
 }
 
-export default function ContactForm({ palette }: ContactFormProps) {
+export default function ContactForm({ palette, generationId }: ContactFormProps) {
   const [form, setForm] = useState({ name: "", email: "", company: "", message: "", honeypot: "" });
   const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
   const [errorMsg, setErrorMsg] = useState("");
@@ -18,7 +19,7 @@ export default function ContactForm({ palette }: ContactFormProps) {
     const res = await fetch("/api/contact", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(form),
+      body: JSON.stringify({ ...form, generationId }),
     });
 
     if (res.ok) {
