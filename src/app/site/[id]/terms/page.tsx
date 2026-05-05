@@ -3,6 +3,9 @@ import { getBasePath } from "@/lib/site-href";
 import { notFound } from "next/navigation";
 import SiteNav from "@/components/SiteNav";
 import SiteFooter from "@/components/SiteFooter";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = { title: "Terms of Service" };
 
 export default async function TermsPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;

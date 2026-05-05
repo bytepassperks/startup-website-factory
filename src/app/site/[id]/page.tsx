@@ -406,17 +406,19 @@ export default async function SiteHomePage({ params }: { params: Promise<{ id: s
 
   function renderHowItWorks() {
     if (howItWorks.length === 0) return null;
+    const steps = howItWorks.slice(0, 4);
+    const gridCols = steps.length <= 3 ? "md:grid-cols-3" : "md:grid-cols-4";
     return (
-      <section key="how-it-works" className={lc.sectionSpacing} style={{ backgroundColor: palette.bg === "#ffffff" || palette.bg === "#FFFFFF" ? "#f9fafb" : palette.bg + "dd" }}>
+      <section key="how-it-works" className={lc.sectionSpacing} style={{ backgroundColor: "#ffffff" }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className={`text-3xl font-bold text-center mb-12 ${anim}`} style={{ color: palette.text }}>How It Works</h2>
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-            {howItWorks.slice(0, 4).map((step, i) => (
+          <div className={`grid grid-cols-1 ${gridCols} gap-8`}>
+            {steps.map((step, i) => (
               <div key={i} className={`text-center ${anim}`} style={{ transitionDelay: `${i * 100}ms` }}>
                 <div className="w-12 h-12 rounded-full mx-auto mb-4 flex items-center justify-center text-white font-bold" style={{ backgroundColor: palette.primary }}>
                   {i + 1}
                 </div>
-                <h3 className="font-semibold mb-2">{step.title}</h3>
+                <h3 className="font-semibold mb-2" style={{ color: palette.text }}>{step.title}</h3>
                 <p className="text-sm text-gray-500">{step.desc}</p>
               </div>
             ))}
@@ -523,19 +525,19 @@ export default async function SiteHomePage({ params }: { params: Promise<{ id: s
       { name: "Jordan M.", role: "Operations Director", quote: `Best investment we've made this year. The team loves it.` },
     ];
     return (
-      <section key="testimonials" className={lc.sectionSpacing} style={{ backgroundColor: palette.bg === "#ffffff" || palette.bg === "#FFFFFF" ? "#f9fafb" : palette.bg }}>
+      <section key="testimonials" className={lc.sectionSpacing} style={{ backgroundColor: "#f9fafb" }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className={`text-3xl font-bold text-center mb-12 ${anim}`} style={{ color: palette.text }}>What People Say</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {testimonials.map((t, i) => (
-              <div key={i} className={`${lc.borderRadius} p-6 bg-white border border-gray-100 ${anim}`} style={{ transitionDelay: `${i * 100}ms` }}>
+              <div key={i} className={`${lc.borderRadius} p-6 bg-white shadow-md ${anim}`} style={{ transitionDelay: `${i * 100}ms` }}>
                 <p className="text-gray-600 italic mb-4">&ldquo;{t.quote}&rdquo;</p>
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 rounded-full flex items-center justify-center text-white text-sm font-bold" style={{ backgroundColor: palette.primary }}>
                     {t.name[0]}
                   </div>
                   <div>
-                    <div className="text-sm font-semibold">{t.name}</div>
+                    <div className="text-sm font-semibold" style={{ color: palette.text }}>{t.name}</div>
                     <div className="text-xs text-gray-500">{t.role}</div>
                   </div>
                 </div>

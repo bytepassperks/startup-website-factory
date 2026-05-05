@@ -2,7 +2,10 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Startup Website Factory",
+  title: {
+    default: "Startup Website Factory",
+    template: "%s",
+  },
   description: "Generate unique startup websites with one click",
 };
 

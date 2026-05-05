@@ -3,6 +3,9 @@ import { getBasePath } from "@/lib/site-href";
 import { notFound } from "next/navigation";
 import SiteNav from "@/components/SiteNav";
 import SiteFooter from "@/components/SiteFooter";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = { title: "Privacy Policy" };
 
 export default async function PrivacyPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;

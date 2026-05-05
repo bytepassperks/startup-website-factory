@@ -134,13 +134,41 @@ export default function ConfigureForm({ generationId }: { generationId: string }
               <p className="text-xs text-gray-400 mt-1">Shown on the contact page of this site.</p>
             </div>
             {domainBase && (
-              <div className="bg-indigo-50 border border-indigo-100 rounded-lg p-4">
-                <h4 className="text-sm font-medium text-indigo-800 mb-2">Preview</h4>
-                <div className="space-y-1 text-xs text-indigo-700">
-                  <p>Website domain: <code className="bg-indigo-100 px-1.5 py-0.5 rounded">{domainBase}</code></p>
-                  <p>Contact email: <code className="bg-indigo-100 px-1.5 py-0.5 rounded">{config.contactFormEmail || `contact@${domainBase}`}</code></p>
+              <>
+                <div className="bg-indigo-50 border border-indigo-100 rounded-lg p-4">
+                  <h4 className="text-sm font-medium text-indigo-800 mb-2">Preview</h4>
+                  <div className="space-y-1 text-xs text-indigo-700">
+                    <p>Website domain: <code className="bg-indigo-100 px-1.5 py-0.5 rounded">{domainBase}</code></p>
+                    <p>Contact email: <code className="bg-indigo-100 px-1.5 py-0.5 rounded">{config.contactFormEmail || `contact@${domainBase}`}</code></p>
+                  </div>
                 </div>
-              </div>
+                <div className="bg-amber-50 border border-amber-200 rounded-lg p-4">
+                  <h4 className="text-sm font-medium text-amber-800 mb-2">DNS Setup Required</h4>
+                  <p className="text-xs text-amber-700 mb-3">Add these DNS records at your domain registrar (e.g. Wix, GoDaddy, Namecheap):</p>
+                  <table className="w-full text-xs">
+                    <thead>
+                      <tr className="text-left text-amber-800">
+                        <th className="pb-1 pr-2">Type</th>
+                        <th className="pb-1 pr-2">Name</th>
+                        <th className="pb-1">Value</th>
+                      </tr>
+                    </thead>
+                    <tbody className="text-amber-700">
+                      <tr>
+                        <td className="py-0.5 pr-2 font-mono">A</td>
+                        <td className="py-0.5 pr-2 font-mono">@</td>
+                        <td className="py-0.5 font-mono">{process.env.NEXT_PUBLIC_PROXY_IP || "168.144.89.128"}</td>
+                      </tr>
+                      <tr>
+                        <td className="py-0.5 pr-2 font-mono">CNAME</td>
+                        <td className="py-0.5 pr-2 font-mono">www</td>
+                        <td className="py-0.5 font-mono">{domainBase}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <p className="text-xs text-amber-600 mt-2">SSL certificates are provisioned automatically once DNS propagates.</p>
+                </div>
+              </>
             )}
           </div>
         </section>
