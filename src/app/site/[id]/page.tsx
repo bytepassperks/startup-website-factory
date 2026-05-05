@@ -1,5 +1,6 @@
 import { getSiteData } from "@/lib/site-data";
 import { getLayoutConfig } from "@/lib/layout-config";
+import { getBasePath } from "@/lib/site-href";
 import { notFound } from "next/navigation";
 import SiteNav from "@/components/SiteNav";
 import SiteFooter from "@/components/SiteFooter";
@@ -19,6 +20,8 @@ export default async function SiteHomePage({ params }: { params: Promise<{ id: s
   const howItWorks = (fullGeneratedCopy.howItWorks || []) as { title: string; desc: string }[];
   const lc = getLayoutConfig(layoutVariant);
   const anim = lc.animClass;
+  const basePath = await getBasePath(id);
+  const b = basePath;
 
   // Build ordered sections from sectionOrder
   const sectionMap: Record<string, () => React.ReactNode> = {
@@ -51,10 +54,10 @@ export default async function SiteHomePage({ params }: { params: Promise<{ id: s
               {heroSubheadline}
             </p>
             <div className="flex flex-wrap gap-4 justify-center anim-fade-up" style={{ transitionDelay: "300ms" }}>
-              <Link href={`/site/${id}/pricing`} className={`px-8 py-3.5 ${lc.borderRadius} font-semibold text-sm transition-transform hover:scale-105`} style={{ backgroundColor: palette.accent, color: palette.text }}>
+              <Link href={`${b}/pricing`} className={`px-8 py-3.5 ${lc.borderRadius} font-semibold text-sm transition-transform hover:scale-105`} style={{ backgroundColor: palette.accent, color: palette.text }}>
                 Get Started Free
               </Link>
-              <Link href={`/site/${id}/how-it-works`} className={`px-8 py-3.5 ${lc.borderRadius} font-semibold text-sm border-2 border-white/30 text-white hover:bg-white/10`}>
+              <Link href={`${b}/how-it-works`} className={`px-8 py-3.5 ${lc.borderRadius} font-semibold text-sm border-2 border-white/30 text-white hover:bg-white/10`}>
                 See How It Works →
               </Link>
             </div>
@@ -81,7 +84,7 @@ export default async function SiteHomePage({ params }: { params: Promise<{ id: s
                   {heroSubheadline}
                 </p>
                 <div className="flex flex-wrap gap-4 anim-fade-left" style={{ transitionDelay: "300ms" }}>
-                  <Link href={`/site/${id}/pricing`} className="px-8 py-3.5 rounded-full font-semibold text-sm transition-transform hover:scale-105 bg-white" style={{ color: palette.primary }}>
+                  <Link href={`${b}/pricing`} className="px-8 py-3.5 rounded-full font-semibold text-sm transition-transform hover:scale-105 bg-white" style={{ color: palette.primary }}>
                     Start Free Trial
                   </Link>
                 </div>
@@ -111,7 +114,7 @@ export default async function SiteHomePage({ params }: { params: Promise<{ id: s
               {heroSubheadline}
             </p>
             <div className="flex gap-4 anim-fade-up" style={{ transitionDelay: "300ms" }}>
-              <Link href={`/site/${id}/pricing`} className="px-6 py-3 rounded-lg font-semibold text-sm text-white" style={{ backgroundColor: palette.primary }}>
+              <Link href={`${b}/pricing`} className="px-6 py-3 rounded-lg font-semibold text-sm text-white" style={{ backgroundColor: palette.primary }}>
                 Get Started →
               </Link>
             </div>
@@ -136,7 +139,7 @@ export default async function SiteHomePage({ params }: { params: Promise<{ id: s
                 {heroSubheadline}
               </p>
               <div className="anim-fade-up" style={{ transitionDelay: "300ms" }}>
-                <Link href={`/site/${id}/pricing`} className="inline-block px-10 py-4 rounded-full font-bold text-lg transition-transform hover:scale-105" style={{ backgroundColor: palette.accent, color: palette.text }}>
+                <Link href={`${b}/pricing`} className="inline-block px-10 py-4 rounded-full font-bold text-lg transition-transform hover:scale-105" style={{ backgroundColor: palette.accent, color: palette.text }}>
                   Get Started
                 </Link>
               </div>
@@ -163,10 +166,10 @@ export default async function SiteHomePage({ params }: { params: Promise<{ id: s
                   {heroSubheadline}
                 </p>
                 <div className="flex gap-4 anim-fade-left" style={{ transitionDelay: "300ms" }}>
-                  <Link href={`/site/${id}/pricing`} className="px-8 py-3.5 rounded-lg font-semibold text-sm text-white transition-all hover:brightness-110" style={{ backgroundColor: palette.primary }}>
+                  <Link href={`${b}/pricing`} className="px-8 py-3.5 rounded-lg font-semibold text-sm text-white transition-all hover:brightness-110" style={{ backgroundColor: palette.primary }}>
                     Start Free
                   </Link>
-                  <Link href={`/site/${id}/features`} className="px-8 py-3.5 rounded-lg font-semibold text-sm text-white border border-white/20 hover:border-white/40">
+                  <Link href={`${b}/features`} className="px-8 py-3.5 rounded-lg font-semibold text-sm text-white border border-white/20 hover:border-white/40">
                     Learn More
                   </Link>
                 </div>
@@ -193,7 +196,7 @@ export default async function SiteHomePage({ params }: { params: Promise<{ id: s
               </span>
               <h1 className="text-4xl md:text-5xl font-extrabold text-white mb-6">{heroHeadline}</h1>
               <p className="text-lg text-white/80 mb-8">{heroSubheadline}</p>
-              <Link href={`/site/${id}/pricing`} className="inline-block px-8 py-3.5 rounded-full font-semibold text-sm bg-white transition-transform hover:scale-105" style={{ color: palette.primary }}>
+              <Link href={`${b}/pricing`} className="inline-block px-8 py-3.5 rounded-full font-semibold text-sm bg-white transition-transform hover:scale-105" style={{ color: palette.primary }}>
                 Start Free Trial →
               </Link>
             </div>
@@ -210,7 +213,7 @@ export default async function SiteHomePage({ params }: { params: Promise<{ id: s
               <div className="md:col-span-3 anim-fade-left">
                 <h1 className="text-5xl md:text-6xl font-extrabold text-white mb-6">{heroHeadline}</h1>
                 <p className="text-lg text-white/80 mb-8">{heroSubheadline}</p>
-                <Link href={`/site/${id}/pricing`} className="inline-block px-8 py-3.5 rounded-xl font-semibold text-sm transition-transform hover:scale-105" style={{ backgroundColor: palette.accent, color: palette.text }}>
+                <Link href={`${b}/pricing`} className="inline-block px-8 py-3.5 rounded-xl font-semibold text-sm transition-transform hover:scale-105" style={{ backgroundColor: palette.accent, color: palette.text }}>
                   Get Started Free
                 </Link>
               </div>
@@ -241,10 +244,10 @@ export default async function SiteHomePage({ params }: { params: Promise<{ id: s
                 {heroSubheadline}
               </p>
               <div className="flex flex-wrap gap-3 anim-fade-left" style={{ transitionDelay: "300ms" }}>
-                <Link href={`/site/${id}/pricing`} className={`px-6 py-3 ${lc.borderRadius} font-semibold text-sm transition-transform hover:scale-105`} style={{ backgroundColor: palette.accent, color: palette.text }}>
+                <Link href={`${b}/pricing`} className={`px-6 py-3 ${lc.borderRadius} font-semibold text-sm transition-transform hover:scale-105`} style={{ backgroundColor: palette.accent, color: palette.text }}>
                   Get Started Free
                 </Link>
-                <Link href={`/site/${id}/how-it-works`} className={`px-6 py-3 ${lc.borderRadius} font-semibold text-sm border-2 border-white/30 text-white hover:bg-white/10`}>
+                <Link href={`${b}/how-it-works`} className={`px-6 py-3 ${lc.borderRadius} font-semibold text-sm border-2 border-white/30 text-white hover:bg-white/10`}>
                   See How It Works
                 </Link>
               </div>
@@ -462,7 +465,7 @@ export default async function SiteHomePage({ params }: { params: Promise<{ id: s
         <div className={`max-w-3xl mx-auto text-center px-4 ${anim}`}>
           <h2 className="text-3xl font-bold text-white mb-4">Ready to {solution.split(" ").slice(0, 4).join(" ")}?</h2>
           <p className="text-white/80 mb-8">Join thousands of {targetAudience} already using {startupName}.</p>
-          <Link href={`/site/${id}/contact`} className={`inline-block px-8 py-3 ${lc.borderRadius} font-semibold text-sm transition-transform hover:scale-105`}
+          <Link href={`${b}/contact`} className={`inline-block px-8 py-3 ${lc.borderRadius} font-semibold text-sm transition-transform hover:scale-105`}
             style={{ backgroundColor: palette.accent, color: palette.text }}>
             Get Started Today
           </Link>
@@ -506,7 +509,7 @@ export default async function SiteHomePage({ params }: { params: Promise<{ id: s
             ))}
           </div>
           <div className="text-center mt-6">
-            <Link href={`/site/${id}/faq`} className="text-sm font-medium hover:underline" style={{ color: palette.primary }}>View all FAQs →</Link>
+            <Link href={`${b}/faq`} className="text-sm font-medium hover:underline" style={{ color: palette.primary }}>View all FAQs →</Link>
           </div>
         </div>
       </section>
@@ -572,9 +575,9 @@ export default async function SiteHomePage({ params }: { params: Promise<{ id: s
 
   return (
     <div style={{ backgroundColor: palette.bg, color: palette.text }}>
-      <SiteNav id={id} name={startupName} palette={palette} />
+      <SiteNav name={startupName} palette={palette} basePath={basePath} />
       {orderedSections}
-      <SiteFooter id={id} name={startupName} palette={palette} />
+      <SiteFooter name={startupName} palette={palette} basePath={basePath} />
       <ScrollAnimator />
     </div>
   );
