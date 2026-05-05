@@ -49,6 +49,7 @@ model Generation {
   mailgunToEmail     String?
   gmailReplyTo       String?
   contactFormEmail   String?
+  mailgunApiKey      String?  @db.Text
   mailgunSetup       Boolean  @default(false)
 
   matches GenerationMatch[]

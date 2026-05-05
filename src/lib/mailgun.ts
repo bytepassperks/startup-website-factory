@@ -1,4 +1,5 @@
 import { getDomainConfig } from "@/lib/site-data";
+import { decrypt } from "@/lib/crypto";
 
 interface ContactFormData {
   name: string;
@@ -17,7 +18,18 @@ interface MailResult {
 async function getMailConfig(generationId?: string) {
   const config = await getDomainConfig(generationId);
 
-  const apiKey = process.env.MAILGUN_API_KEY;
+  let apiKey: string | undefined;
+  if (config.mailgunApiKey) {
+    try {
+      apiKey = decrypt(config.mailgunApiKey);
+    } catch {
+      apiKey = undefined;
+    }
+  }
+  if (!apiKey) {
+    apiKey = process.env.MAILGUN_API_KEY;
+  }
+
   const domain = config.mailgunDomain || process.env.MAILGUN_DOMAIN;
   const fromEmail = config.mailgunFromEmail || process.env.MAILGUN_FROM_EMAIL;
   const toEmail = config.mailgunToEmail || process.env.MAILGUN_TO_EMAIL;

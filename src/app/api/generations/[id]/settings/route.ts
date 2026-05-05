@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/db";
+import { encrypt, maskApiKey } from "@/lib/crypto";
 
 const DOMAIN_FIELDS = [
   "purchasedDomain",
@@ -22,6 +23,8 @@ export async function GET(_request: Request, { params }: { params: Promise<{ id:
   }
   config.startupName = gen.startupName;
   config.domainSuggestion = gen.domainSuggestion;
+  config.hasMailgunApiKey = !!gen.mailgunApiKey;
+  config.mailgunApiKeyMasked = gen.mailgunApiKey ? maskApiKey("stored-key") : null;
 
   return NextResponse.json(config);
 }
@@ -37,6 +40,15 @@ export async function PATCH(request: Request, { params }: { params: Promise<{ id
     }
   }
 
+  if ("mailgunApiKey" in body) {
+    const rawKey = body.mailgunApiKey as string | null;
+    if (rawKey && rawKey.trim()) {
+      updateData.mailgunApiKey = encrypt(rawKey.trim());
+    } else {
+      updateData.mailgunApiKey = null;
+    }
+  }
+
   const gen = await prisma.generation.update({
     where: { id },
     data: updateData,
@@ -48,6 +60,8 @@ export async function PATCH(request: Request, { params }: { params: Promise<{ id
   }
   config.startupName = gen.startupName;
   config.domainSuggestion = gen.domainSuggestion;
+  config.hasMailgunApiKey = !!gen.mailgunApiKey;
+  config.mailgunApiKeyMasked = gen.mailgunApiKey ? maskApiKey("stored-key") : null;
 
   return NextResponse.json(config);
 }
