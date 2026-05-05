@@ -13,6 +13,7 @@ interface Generation {
   deploymentStatus: string;
   mailgunStatus: string;
   archived: boolean;
+  purchasedDomain: string | null;
   uniquenessScores: { overallScore: number; isUnique: boolean } | null;
   nearestMatches: { id: string; score: number }[] | null;
 }
@@ -67,11 +68,17 @@ export default function Dashboard() {
   };
 
   const handleDeploy = async (id: string) => {
-    await fetch("/api/deploy", {
+    const res = await fetch("/api/deploy", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ generationId: id }),
     });
+    if (res.ok) {
+      const data = await res.json();
+      if (data.message) {
+        alert(data.message);
+      }
+    }
     await fetchGenerations();
   };
 
