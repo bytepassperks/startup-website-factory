@@ -1,4 +1,4 @@
-import { prisma } from "@/lib/db";
+import { getDomainConfig } from "@/lib/site-data";
 
 interface ContactFormData {
   name: string;
@@ -6,6 +6,7 @@ interface ContactFormData {
   message: string;
   honeypot?: string;
   company?: string;
+  generationId?: string;
 }
 
 interface MailResult {
@@ -13,14 +14,14 @@ interface MailResult {
   error?: string;
 }
 
-async function getMailConfig() {
-  const settings = await prisma.siteSettings.findUnique({ where: { id: "default" } });
+async function getMailConfig(generationId?: string) {
+  const config = await getDomainConfig(generationId);
 
   const apiKey = process.env.MAILGUN_API_KEY;
-  const domain = settings?.mailgunDomain || process.env.MAILGUN_DOMAIN;
-  const fromEmail = settings?.mailgunFromEmail || process.env.MAILGUN_FROM_EMAIL;
-  const toEmail = settings?.mailgunToEmail || process.env.MAILGUN_TO_EMAIL;
-  const replyTo = settings?.gmailReplyTo;
+  const domain = config.mailgunDomain || process.env.MAILGUN_DOMAIN;
+  const fromEmail = config.mailgunFromEmail || process.env.MAILGUN_FROM_EMAIL;
+  const toEmail = config.mailgunToEmail || process.env.MAILGUN_TO_EMAIL;
+  const replyTo = config.gmailReplyTo;
 
   return { apiKey, domain, fromEmail, toEmail, replyTo };
 }
@@ -39,7 +40,7 @@ export async function sendContactEmail(data: ContactFormData): Promise<MailResul
     return { success: false, error: "Invalid email address" };
   }
 
-  const { apiKey, domain, fromEmail, toEmail, replyTo } = await getMailConfig();
+  const { apiKey, domain, fromEmail, toEmail, replyTo } = await getMailConfig(data.generationId);
 
   if (!apiKey || !domain || !fromEmail || !toEmail) {
     return { success: false, error: "Mail service not configured" };

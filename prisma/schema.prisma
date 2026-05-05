@@ -42,6 +42,15 @@ model Generation {
   mailgunStatus      String   @default("not_configured")
   archived           Boolean  @default(false)
 
+  // Per-site domain & mail config (overrides global SiteSettings)
+  purchasedDomain    String?
+  mailgunDomain      String?
+  mailgunFromEmail   String?
+  mailgunToEmail     String?
+  gmailReplyTo       String?
+  contactFormEmail   String?
+  mailgunSetup       Boolean  @default(false)
+
   matches GenerationMatch[]
 }
 

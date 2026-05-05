@@ -4,16 +4,26 @@ export interface DomainConfig {
   purchasedDomain: string | null;
   contactFormEmail: string | null;
   gmailReplyTo: string | null;
+  mailgunDomain: string | null;
+  mailgunFromEmail: string | null;
+  mailgunToEmail: string | null;
   mailgunSetup: boolean;
 }
 
-export async function getDomainConfig(): Promise<DomainConfig> {
-  const settings = await prisma.siteSettings.findUnique({ where: { id: "default" } });
+export async function getDomainConfig(generationId?: string): Promise<DomainConfig> {
+  const [gen, settings] = await Promise.all([
+    generationId ? prisma.generation.findUnique({ where: { id: generationId } }) : null,
+    prisma.siteSettings.findUnique({ where: { id: "default" } }),
+  ]);
+
   return {
-    purchasedDomain: settings?.purchasedDomain || null,
-    contactFormEmail: settings?.contactFormEmail || null,
-    gmailReplyTo: settings?.gmailReplyTo || null,
-    mailgunSetup: settings?.mailgunSetup || false,
+    purchasedDomain: gen?.purchasedDomain || settings?.purchasedDomain || null,
+    contactFormEmail: gen?.contactFormEmail || settings?.contactFormEmail || null,
+    gmailReplyTo: gen?.gmailReplyTo || settings?.gmailReplyTo || null,
+    mailgunDomain: gen?.mailgunDomain || settings?.mailgunDomain || null,
+    mailgunFromEmail: gen?.mailgunFromEmail || settings?.mailgunFromEmail || null,
+    mailgunToEmail: gen?.mailgunToEmail || settings?.mailgunToEmail || null,
+    mailgunSetup: gen?.mailgunSetup || settings?.mailgunSetup || false,
   };
 }
 

@@ -85,6 +85,12 @@ export default function GenerationCard({
         >
           View Site
         </Link>
+        <Link
+          href={`/configure/${gen.id}`}
+          className="px-3 py-1.5 text-xs font-medium bg-purple-600 text-white rounded-lg hover:bg-purple-500 transition-colors"
+        >
+          Configure
+        </Link>
         <button
           onClick={() => onDeploy(gen.id)}
           className="px-3 py-1.5 text-xs font-medium bg-emerald-600 text-white rounded-lg hover:bg-emerald-500 transition-colors"
