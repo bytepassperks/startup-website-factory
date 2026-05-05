@@ -11,8 +11,8 @@ interface PageGridMessage {
   content: string;
 }
 
-const MAX_RETRIES = 3;
-const TIMEOUT_MS = 45000;
+const MAX_RETRIES = 1;
+const TIMEOUT_MS = 25000;
 
 async function callPageGrid(messages: PageGridMessage[], maxTokens = 4096): Promise<string | null> {
   const apiKey = process.env.PAGEGRID_API_KEY;
