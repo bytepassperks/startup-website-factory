@@ -13,7 +13,7 @@ export default async function SiteHomePage({ params }: { params: Promise<{ id: s
 
   const { palette, selectedImages, featureList, pricingTiers, sectionOrder,
     startupName, category, heroHeadline, heroSubheadline, tagline, solution,
-    targetAudience, faqItems, layoutVariant, founderName, aboutCopy, problem,
+    targetAudience, faqItems, layoutVariant,
     fullGeneratedCopy } = site;
   const heroImg = selectedImages[0]?.url;
   const howItWorks = (fullGeneratedCopy.howItWorks || []) as { title: string; desc: string }[];

@@ -36,8 +36,14 @@ export default function Dashboard() {
   }, []);
 
   useEffect(() => {
-    fetchGenerations();
-  }, [fetchGenerations]);
+    let cancelled = false;
+    fetch("/api/generations")
+      .then((res) => res.ok ? res.json() : null)
+      .then((data) => { if (!cancelled && data) setGenerations(data); })
+      .catch(() => {})
+      .finally(() => { if (!cancelled) setLoading(false); });
+    return () => { cancelled = true; };
+  }, []);
 
   const handleGenerate = async () => {
     setGenerating(true);

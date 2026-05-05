@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 
 interface SiteConfig {
@@ -22,12 +22,13 @@ export default function ConfigureForm({ generationId }: { generationId: string }
   const [testingMail, setTestingMail] = useState(false);
   const [testResult, setTestResult] = useState<string | null>(null);
 
-  const fetchConfig = useCallback(async () => {
-    const res = await fetch(`/api/generations/${generationId}/settings`);
-    if (res.ok) setConfig(await res.json());
+  useEffect(() => {
+    let cancelled = false;
+    fetch(`/api/generations/${generationId}/settings`)
+      .then((res) => res.ok ? res.json() : null)
+      .then((data) => { if (!cancelled && data) setConfig(data); });
+    return () => { cancelled = true; };
   }, [generationId]);
-
-  useEffect(() => { fetchConfig(); }, [fetchConfig]);
 
   const handleSave = async () => {
     if (!config) return;

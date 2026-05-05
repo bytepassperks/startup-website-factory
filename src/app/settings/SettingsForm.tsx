@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 
 interface Settings {
@@ -32,21 +32,14 @@ export default function SettingsForm() {
   const [testingMail, setTestingMail] = useState(false);
   const [testResult, setTestResult] = useState<string | null>(null);
 
-  const fetchSettings = useCallback(async () => {
-    try {
-      const res = await fetch("/api/settings");
-      if (res.ok) {
-        const data = await res.json();
-        setSettings(data);
-      }
-    } catch {
-      // silently handle
-    }
-  }, []);
-
   useEffect(() => {
-    fetchSettings();
-  }, [fetchSettings]);
+    let cancelled = false;
+    fetch("/api/settings")
+      .then((res) => res.ok ? res.json() : null)
+      .then((data) => { if (!cancelled && data) setSettings(data); })
+      .catch(() => {});
+    return () => { cancelled = true; };
+  }, []);
 
   const handleSave = async () => {
     setSaving(true);
