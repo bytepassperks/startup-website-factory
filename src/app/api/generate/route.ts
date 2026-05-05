@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/db";
 import { generateSite } from "@/lib/generator";
+import { generateSiteWithAI } from "@/lib/ai-generator";
 import { checkUniqueness } from "@/lib/uniqueness";
 import { searchUnsplash } from "@/lib/unsplash";
 import type { Prisma } from "@/generated/prisma/client";
@@ -20,7 +21,25 @@ export async function POST(request: Request) {
       take: 50,
     });
 
-    let site = generateSite(seed);
+    const useAI = !!process.env.PAGEGRID_API_KEY;
+    let generationMethod = "deterministic";
+
+    let site;
+    if (useAI) {
+      try {
+        site = await generateSiteWithAI(
+          seed,
+          existing.map((e) => ({ startupName: e.startupName }))
+        );
+        generationMethod = "ai";
+      } catch {
+        console.log("AI generation failed, falling back to deterministic");
+        site = generateSite(seed);
+      }
+    } else {
+      site = generateSite(seed);
+    }
+
     let attempts = 0;
     const maxAttempts = 5;
 
@@ -54,19 +73,29 @@ export async function POST(request: Request) {
         }))
       );
 
-      if (report.isUnique) {
-        site = {
-          ...site,
-        };
-        break;
-      }
+      if (report.isUnique) break;
 
       if (module) {
         site = generateSite();
+        generationMethod = "deterministic";
         break;
       }
 
-      site = generateSite();
+      if (useAI && attempts < 2) {
+        try {
+          site = await generateSiteWithAI(
+            undefined,
+            existing.map((e) => ({ startupName: e.startupName }))
+          );
+          generationMethod = "ai";
+        } catch {
+          site = generateSite();
+          generationMethod = "deterministic";
+        }
+      } else {
+        site = generateSite();
+        generationMethod = "deterministic";
+      }
       attempts++;
     }
 
@@ -136,10 +165,12 @@ export async function POST(request: Request) {
           howItWorks: site.howItWorks,
           privacyPolicy: site.privacyPolicy,
           termsOfService: site.termsOfService,
+          generationMethod,
         }),
         uniquenessScores: toJson({
           overallScore: uniquenessReport.overallScore,
           isUnique: uniquenessReport.isUnique,
+          generationMethod,
           fieldScores: uniquenessReport.results.reduce(
             (acc, r) => {
               if (!acc[r.field] || r.score > acc[r.field]) acc[r.field] = r.score;
@@ -172,7 +203,7 @@ export async function POST(request: Request) {
       }
     }
 
-    return NextResponse.json(generation);
+    return NextResponse.json({ ...generation, generationMethod });
   } catch (error) {
     console.error("Generation error:", error);
     return NextResponse.json(

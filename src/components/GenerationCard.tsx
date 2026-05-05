@@ -11,7 +11,7 @@ interface Generation {
   deploymentStatus: string;
   mailgunStatus: string;
   archived: boolean;
-  uniquenessScores: { overallScore: number; isUnique: boolean } | null;
+  uniquenessScores: { overallScore: number; isUnique: boolean; generationMethod?: string } | null;
   nearestMatches: { id: string; score: number }[] | null;
 }
 
@@ -39,9 +39,17 @@ export default function GenerationCard({
           <h3 className="font-semibold text-lg text-gray-900">{gen.startupName}</h3>
           <p className="text-sm text-gray-500">{gen.category}</p>
         </div>
-        <span className={`text-xs px-2 py-1 rounded-full font-medium ${statusColors[gen.deploymentStatus] || statusColors.draft}`}>
-          {gen.deploymentStatus}
-        </span>
+        <div className="flex items-center gap-2">
+          {gen.uniquenessScores?.generationMethod === "ai" && (
+            <span className="text-xs px-2 py-1 rounded-full font-medium bg-purple-100 text-purple-700">AI</span>
+          )}
+          {gen.uniquenessScores?.generationMethod === "deterministic" && (
+            <span className="text-xs px-2 py-1 rounded-full font-medium bg-orange-100 text-orange-700">Seed</span>
+          )}
+          <span className={`text-xs px-2 py-1 rounded-full font-medium ${statusColors[gen.deploymentStatus] || statusColors.draft}`}>
+            {gen.deploymentStatus}
+          </span>
+        </div>
       </div>
 
       <p className="text-sm text-gray-600 mb-3 italic">&ldquo;{gen.tagline}&rdquo;</p>

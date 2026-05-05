@@ -1,7 +1,24 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/db";
 import { generateSite } from "@/lib/generator";
+import { generateSiteWithAI } from "@/lib/ai-generator";
 import { searchUnsplash } from "@/lib/unsplash";
+
+async function getFreshSite() {
+  if (process.env.PAGEGRID_API_KEY) {
+    try {
+      const allGens = await prisma.generation.findMany({
+        where: { archived: false },
+        select: { startupName: true },
+        take: 50,
+      });
+      return await generateSiteWithAI(undefined, allGens);
+    } catch {
+      return generateSite();
+    }
+  }
+  return generateSite();
+}
 
 export async function POST(request: Request) {
   try {
@@ -16,7 +33,7 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "Not found" }, { status: 404 });
     }
 
-    const freshSite = generateSite();
+    const freshSite = await getFreshSite();
 
     type UpdateData = Record<string, unknown>;
     const updates: UpdateData = {};
