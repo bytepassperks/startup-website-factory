@@ -6,6 +6,11 @@ export const CATEGORIES = [
   "CyberSecurity", "DevTools", "DataAnalytics", "AI/ML Platform",
   "IoT Solutions", "Blockchain Services", "AR/VR Experiences",
   "Mental Wellness", "Remote Work", "Sustainability",
+  "SupplyChain Tech", "GovTech", "Construction Tech", "WealthTech",
+  "AutoTech", "MediaTech", "EventTech", "ClimateTech", "RegTech",
+  "SocialImpact", "GameTech", "NeuroTech", "RoboTech", "EnergyTech",
+  "TeleHealth", "DroneOps", "QuantumTech", "Digital Twins",
+  "No-Code Platform", "Creator Economy",
 ];
 
 export const NAME_PREFIXES = [
@@ -16,6 +21,17 @@ export const NAME_PREFIXES = [
   "Aero", "Bolt", "Cyan", "Dune", "Fern", "Glow", "Haze", "Jade",
   "Keen", "Loom", "Mist", "Nook", "Opal", "Pine", "Reef", "Silk",
   "True", "Umber", "Vale", "Zest",
+  "Arc", "Brisk", "Cloud", "Delta", "Ember", "Frost", "Grain", "Halo",
+  "Iris", "Jolt", "Knot", "Luna", "Maple", "Noble", "Pyxis", "Quartz",
+  "Ripple", "Slate", "Torch", "Unity", "Vivid", "Willow", "Xenon", "Yield",
+  "Zinc", "Blaze", "Coral", "Dawn", "Edge", "Flint", "Grove", "Haven",
+  "Ivy", "Jewel", "Kite", "Lark", "Moss", "Nectar", "Oak", "Pearl",
+  "Quest", "Rune", "Storm", "Thorn", "Aura", "Birch", "Clover", "Drift",
+  "Elm", "Flame", "Gem", "Hawk", "Indigo", "Jasper", "Kelp", "Lotus",
+  "Mars", "North", "Orbit", "Petal", "Ray", "Sable", "Trace", "Umbra",
+  "Vertex", "Wave", "Zephyr", "Ash", "Bay", "Cove", "Dusk", "Eve",
+  "Fjord", "Gleam", "Horn", "Isle", "Jet", "Keel", "Leaf", "Muse",
+  "Neon", "Ore", "Plume", "Quasar", "Reed", "Summit", "Tide", "Ursa",
 ];
 
 export const NAME_SUFFIXES = [
@@ -25,6 +41,10 @@ export const NAME_SUFFIXES = [
   "leap", "dock", "hive", "gate", "mark", "edge", "line", "beam",
   "root", "seed", "sail", "rise", "loop", "byte", "node", "dash",
   "fold", "plex", "span", "tier", "view", "work", "core", "ring",
+  "cast", "set", "kit", "map", "run", "tap", "box", "key",
+  "forge", "track", "bridge", "cloud", "vault", "scope", "trail", "pod",
+  "arc", "spark", "bind", "chain", "mesh", "pulse", "web", "signal",
+  "lens", "port", "frame", "field", "helm", "space", "code", "net",
 ];
 
 export const FIRST_NAMES = [
@@ -34,6 +54,13 @@ export const FIRST_NAMES = [
   "Reese", "Sage", "Skyler", "Tatum", "River", "Wren", "Emery",
   "Rowan", "Arden", "Sloane", "Devon", "Remy", "Milan", "Phoenix",
   "Eden", "Lennox", "Marlowe", "Haven", "Sutton",
+  "Aspen", "Blair", "Cruz", "Dakota", "Ellis", "Frankie", "Gray",
+  "Harlow", "Indigo", "Jules", "Kendall", "Lane", "Monroe", "Nash",
+  "Oakley", "Palmer", "Reece", "Sawyer", "Tate", "Uri",
+  "Vaughn", "West", "Ximena", "Yael", "Zara", "Addison", "Beck",
+  "Cade", "Dylan", "Emerson", "Flynn", "Greer", "Hollis", "Ira",
+  "Jesse", "Kit", "Logan", "Merritt", "Nico", "Onyx", "Pace",
+  "Rain", "Scout", "Theo", "Umi", "Val", "Winter", "Xander", "Yuri", "Zane",
 ];
 
 export const LAST_NAMES = [
@@ -43,13 +70,21 @@ export const LAST_NAMES = [
   "Park", "Johansson", "Moreau", "Kapoor", "Novak", "Santos", "Ali",
   "Meyer", "Rossi", "Fernandez", "Huang", "Petrov", "Dubois", "Lam",
   "Gupta", "Fischer", "Mendez", "Ito", "Hansen", "Brennan",
+  "Zhou", "Kozlov", "Sato", "Müller", "Silva", "Jansen", "Sharma",
+  "Nguyen", "Olsen", "Martin", "Lee", "Garcia", "Brown", "Wilson",
+  "Clark", "Wright", "Lopez", "Hill", "Scott", "Green",
+  "Adams", "Baker", "Diaz", "Evans", "Fox", "Gray", "Hall",
+  "James", "Kelly", "Long", "Mills", "Nash", "Owen", "Price",
+  "Quinn", "Reed", "Stone", "Turner", "Vega", "Ward", "Young",
 ];
 
 export const FOUNDER_ROLES = [
   "CEO & Co-Founder", "CTO & Founder", "CEO & Founder",
   "Chief Product Officer & Co-Founder", "Managing Director & Founder",
   "Head of Innovation & Founder", "Chief Vision Officer",
-  "President & Co-Founder",
+  "President & Co-Founder", "CEO & Chief Architect",
+  "Founder & Principal Engineer", "Co-Founder & Head of Design",
+  "Founder & Chief Strategist", "CEO & Head of R&D",
 ];
 
 export const AUDIENCES = [
@@ -60,6 +95,13 @@ export const AUDIENCES = [
   "HR departments", "logistics managers", "restaurant owners",
   "fitness coaches", "legal professionals", "non-profit organizations",
   "parents and families", "college students",
+  "startup founders", "data scientists", "product managers",
+  "sales teams", "accountants", "architects", "event planners",
+  "photographers", "fleet operators", "supply chain managers",
+  "venture capitalists", "insurance agents", "social media managers",
+  "podcast creators", "game developers", "UX researchers",
+  "clinical researchers", "teachers and tutors", "warehouse operators",
+  "construction managers",
 ];
 
 export const PROBLEMS = [
@@ -78,6 +120,21 @@ export const PROBLEMS = [
   "cannot predict market shifts early enough to adapt",
   "struggle with onboarding new team members efficiently",
   "face security vulnerabilities from legacy systems",
+  "lose track of project timelines and budget overruns",
+  "can't generate accurate forecasts from fragmented data",
+  "spend more time reporting than executing strategy",
+  "miss critical deadlines due to poor task prioritization",
+  "fail to capture institutional knowledge when employees leave",
+  "experience constant context-switching between disconnected apps",
+  "cannot measure the true ROI of their initiatives",
+  "struggle to maintain consistent brand messaging across channels",
+  "are unable to provide 24/7 support without burning out their team",
+  "face growing cybersecurity threats with limited resources",
+  "lack the tools to effectively manage remote or hybrid teams",
+  "cannot turn raw data into actionable business intelligence",
+  "face increasing regulatory requirements with manual processes",
+  "struggle to build and maintain customer loyalty programs",
+  "can't efficiently manage inventory across multiple locations",
 ];
 
 export const SOLUTION_TEMPLATES = [
@@ -91,6 +148,16 @@ export const SOLUTION_TEMPLATES = [
   "a collaboration hub designed for {audience} working across time zones",
   "an all-in-one suite that replaces {count} fragmented tools with one cohesive experience",
   "a personalization engine that tailors every {domain} interaction to each customer",
+  "a predictive analytics platform that forecasts {metric} with 95% accuracy",
+  "a no-code automation builder that lets {audience} create workflows in minutes",
+  "a secure command center that centralizes all {domain} operations under one roof",
+  "an adaptive learning system that gets smarter with every {domain} interaction",
+  "a real-time monitoring platform that alerts you before {process} issues arise",
+  "a mobile-first workspace that keeps {audience} productive from anywhere",
+  "a smart orchestration layer that connects all your {domain} tools seamlessly",
+  "an intelligent scheduling system that optimizes {process} around your constraints",
+  "a self-service portal that empowers {audience} to solve problems independently",
+  "a next-gen platform that turns {domain} complexity into competitive advantage",
 ];
 
 export const TAGLINE_PATTERNS = [
@@ -104,18 +171,32 @@ export const TAGLINE_PATTERNS = [
   "Smarter {noun}. Faster {outcome}.",
   "One platform. Every {noun} answered.",
   "From {pain} to {outcome} in minutes.",
+  "{verb} smarter, not harder.",
+  "Your {domain}, your rules.",
+  "{noun} that actually works.",
+  "The {noun} platform teams love.",
+  "Where {audience} come to {verb}.",
+  "Less {pain}, more {outcome}.",
+  "{verb} at the speed of thought.",
+  "The operating system for {domain}.",
+  "Built by {audience}, for {audience}.",
+  "Modern {noun} for modern teams.",
 ];
 
 export const VERBS = [
   "Transform", "Elevate", "Accelerate", "Simplify", "Unlock",
   "Supercharge", "Streamline", "Revolutionize", "Amplify", "Optimize",
   "Automate", "Empower", "Scale", "Reinvent", "Master",
+  "Unify", "Orchestrate", "Catalyze", "Pioneer", "Harness",
+  "Activate", "Mobilize", "Integrate", "Modernize", "Digitize",
 ];
 
 export const NOUNS = [
   "workflow", "growth", "productivity", "efficiency", "insights",
   "operations", "performance", "engagement", "pipeline", "strategy",
   "collaboration", "analytics", "experience", "infrastructure", "intelligence",
+  "execution", "innovation", "agility", "visibility", "outcomes",
+  "decisions", "processes", "communications", "compliance", "scalability",
 ];
 
 export const OUTCOMES = [
@@ -124,12 +205,20 @@ export const OUTCOMES = [
   "Build without boundaries", "Scale with confidence",
   "Make every decision count", "Deliver exceptional experiences",
   "Stay ahead of the curve", "Turn complexity into clarity",
+  "Grow revenue predictably", "Reduce costs by 40%",
+  "Ship faster than ever", "Delight your customers",
+  "Win back your time", "Lead your industry",
+  "Move from reactive to proactive", "Turn data into action",
+  "Build lasting relationships", "Eliminate operational bottlenecks",
 ];
 
 export const PAINS = [
   "complexity", "guesswork", "manual processes", "data silos",
   "slow turnarounds", "missed deadlines", "scattered tools",
   "hiring bottlenecks", "compliance headaches", "communication breakdowns",
+  "spreadsheet chaos", "information overload", "tool fatigue",
+  "budget uncertainty", "knowledge gaps", "process fragmentation",
+  "security worries", "reporting delays", "talent drain", "tech debt",
 ];
 
 export const HERO_TEMPLATES = [
@@ -141,18 +230,29 @@ export const HERO_TEMPLATES = [
   "Stop {pain}. {verb} Your {domain} Today.",
   "Your {domain} Deserves {adjective} {noun}",
   "Built Different: {adjective} {noun} for {domain}",
+  "The {adjective} {domain} Platform for {audience}",
+  "{verb} the Way {audience} Work",
+  "Where {adjective} {noun} Meets {domain}",
+  "One Platform to {verb} Your Entire {domain}",
+  "{adjective} {noun} — Built for the Future of {domain}",
+  "The Last {domain} Tool You'll Ever Need",
+  "Rethink {domain} with {adjective} {noun}",
 ];
 
 export const ADJECTIVES = [
   "Intelligent", "Effortless", "Powerful", "Seamless", "Next-Gen",
   "Intuitive", "Bulletproof", "Lightning-Fast", "Enterprise-Grade",
   "Human-Centered", "Adaptive", "Precision", "Unified", "Breakthrough",
-  "Dynamic",
+  "Dynamic", "Frictionless", "Scalable", "Modular", "Real-Time",
+  "Predictive", "Autonomous", "Crystal-Clear", "Battle-Tested", "Future-Proof",
+  "Developer-Friendly", "Data-Driven", "Cloud-Native", "Zero-Config", "Mission-Critical",
+  "Open-Source", "Privacy-First",
 ];
 
 export const ADVERBS = [
   "Intelligently", "Effortlessly", "Instantly", "Securely",
   "Reliably", "Automatically", "Precisely", "Gracefully",
+  "Seamlessly", "Confidently", "Proactively", "Intuitively",
 ];
 
 export const FEATURE_NAMES = [
@@ -171,6 +271,26 @@ export const FEATURE_NAMES = [
   "White-Label Options", "Mobile-First Experience",
   "Offline Mode Support", "Bulk Operations Engine",
   "Audit Trail Logger", "Sentiment Analysis Tool",
+  "Smart Document Scanner", "Kanban Board System",
+  "Time Tracking Module", "Expense Management Hub",
+  "Client Portal Builder", "Webhook Orchestrator",
+  "A/B Testing Framework", "Content Delivery Network",
+  "Form Builder Pro", "Survey & Feedback Engine",
+  "Knowledge Base Builder", "Ticket Management System",
+  "Inventory Tracker", "Invoice Generator",
+  "Contract Lifecycle Manager", "Meeting Scheduler",
+  "Resource Planner", "Data Visualization Studio",
+  "Chatbot Builder", "Email Campaign Manager",
+  "Social Listening Dashboard", "Competitive Intelligence Module",
+  "Customer Journey Mapper", "Geo-Location Tracker",
+  "Multi-Language Support", "Template Library",
+  "Digital Signature Module", "File Versioning System",
+  "Automated Backup System", "Usage Analytics Dashboard",
+  "Custom Fields Engine", "Approval Workflow Builder",
+  "Budget Forecasting Tool", "Risk Assessment Module",
+  "Compliance Dashboard", "Data Masking Engine",
+  "SSO Gateway", "Two-Factor Auth Module",
+  "Event Stream Processor", "Batch Processing Engine",
 ];
 
 export const FEATURE_DESCRIPTIONS = [
@@ -204,6 +324,46 @@ export const FEATURE_DESCRIPTIONS = [
   "Process thousands of records at once with our high-performance batch engine.",
   "Maintain a complete audit log of every action for compliance and accountability.",
   "Understand customer sentiment at scale with automated text analysis.",
+  "Digitize and extract data from documents with 99% accuracy using OCR and AI.",
+  "Organize work visually with customizable boards, lists, and swimlanes.",
+  "Track billable hours and project time with one-click timers and reports.",
+  "Manage receipts, approvals, and reimbursements in a single streamlined workflow.",
+  "Give clients a branded self-service portal to track progress and communicate.",
+  "Connect any event to any action with a powerful, visual webhook designer.",
+  "Test variations of any element and measure impact with statistical significance.",
+  "Serve assets globally with sub-100ms load times through edge caching.",
+  "Build complex forms with conditional logic, validation, and file uploads.",
+  "Collect and analyze feedback with customizable surveys and NPS tracking.",
+  "Create a searchable help center with rich articles, videos, and guides.",
+  "Manage support requests from submission to resolution with SLA tracking.",
+  "Track stock levels, set reorder points, and manage across warehouses.",
+  "Create professional invoices, track payments, and send automated reminders.",
+  "Manage the full lifecycle of contracts from drafting to renewal.",
+  "Find the perfect meeting time across time zones with AI-powered scheduling.",
+  "Allocate people, budget, and equipment with capacity planning tools.",
+  "Transform raw data into stunning charts, graphs, and interactive dashboards.",
+  "Deploy conversational AI agents that handle inquiries around the clock.",
+  "Design, schedule, and track email campaigns with advanced segmentation.",
+  "Monitor brand mentions and industry trends across social platforms.",
+  "Track competitor pricing, features, and market positioning automatically.",
+  "Visualize the complete customer experience from first touch to advocacy.",
+  "Track assets and personnel on an interactive map with real-time updates.",
+  "Serve content in 50+ languages with automatic translation and localization.",
+  "Access hundreds of pre-built templates for documents, emails, and workflows.",
+  "Capture legally binding signatures with a fully compliant e-signature flow.",
+  "Track every version of every file with diff views and restore capabilities.",
+  "Protect your data with automated, encrypted backups on a flexible schedule.",
+  "Understand feature adoption and user behavior with built-in product analytics.",
+  "Extend any entity with custom fields to capture exactly the data you need.",
+  "Route requests through multi-step approvals with escalation and delegation.",
+  "Project revenue and expenses with scenario modeling and trend analysis.",
+  "Evaluate and score risks with configurable frameworks and heat maps.",
+  "Monitor regulatory compliance status across all requirements in one view.",
+  "Protect PII and sensitive data with field-level masking and redaction.",
+  "Enable single sign-on across all your apps with SAML 2.0 and OIDC support.",
+  "Add hardware or app-based two-factor authentication for every user account.",
+  "Process millions of events per second with a distributed streaming pipeline.",
+  "Schedule and run large-scale data processing jobs with retry and monitoring.",
 ];
 
 export const FAQ_POOL = [
@@ -222,6 +382,21 @@ export const FAQ_POOL = [
   { q: "How often do you release updates?", a: "We ship improvements weekly. Major features launch quarterly. All updates are automatic—you always have the latest version with zero downtime." },
   { q: "Can I white-label the platform?", a: "Yes, white-labeling is available on Enterprise plans. You can customize colors, logos, domains, and email templates to match your brand." },
   { q: "What uptime do you guarantee?", a: "We maintain a 99.95% uptime SLA. Our infrastructure runs across multiple availability zones with automatic failover." },
+  { q: "Do you offer HIPAA compliance?", a: "Yes, our Enterprise plan is fully HIPAA compliant. We provide BAAs and maintain all required technical safeguards for protected health information." },
+  { q: "Can I export my data?", a: "Absolutely. You can export all your data at any time in CSV, JSON, or XML format. We also provide a full-featured API for programmatic data access." },
+  { q: "How does your pricing scale?", a: "Our pricing is transparent and predictable. You pay per seat with volume discounts starting at 10 users. There are no hidden fees or overage charges." },
+  { q: "Do you provide training?", a: "Yes. All plans include access to our learning center with video tutorials and guides. Pro and Enterprise plans include live training sessions with our team." },
+  { q: "What browsers do you support?", a: "We support all modern browsers including Chrome, Firefox, Safari, and Edge. Our platform is optimized for the latest two versions of each browser." },
+  { q: "Can I use the API to build custom integrations?", a: "Yes. Our REST API is fully documented with SDKs available in Python, JavaScript, Ruby, and Go. API access is included in all paid plans." },
+  { q: "How do you handle data backup?", a: "We perform automated daily backups with point-in-time recovery up to 30 days. Backups are stored in geographically separate regions for redundancy." },
+  { q: "Is there a limit on storage?", a: "Each plan comes with generous storage limits. Starter includes 10GB, Pro includes 100GB, and Enterprise includes unlimited storage." },
+  { q: "Do you support multi-language?", a: "Yes. Our platform supports 30+ languages with full UI localization. You can also customize any text string to match your preferred terminology." },
+  { q: "Can multiple teams use the same account?", a: "Absolutely. Our workspace model supports unlimited teams with separate permissions, dashboards, and reporting while sharing a single billing account." },
+  { q: "What analytics do you provide?", a: "We provide built-in analytics covering user engagement, feature adoption, performance metrics, and ROI tracking. Custom dashboards can be created in minutes." },
+  { q: "How do you handle GDPR compliance?", a: "We are fully GDPR compliant with data processing agreements, data portability, right to deletion, and EU-based data storage options available." },
+  { q: "Can I schedule automated reports?", a: "Yes. Set up recurring reports delivered via email or Slack on daily, weekly, or monthly schedules. Reports are fully customizable with your chosen metrics." },
+  { q: "Do you offer phone support?", a: "Phone support is available on Business and Enterprise plans during business hours (9am-6pm ET). Enterprise plans include 24/7 phone support." },
+  { q: "What is your refund policy?", a: "We offer a 30-day money-back guarantee on all annual plans. Monthly plans can be cancelled at any time with no penalty." },
 ];
 
 export const PRICING_PLAN_NAMES = [
@@ -233,22 +408,35 @@ export const PRICING_PLAN_NAMES = [
   ["Foundation", "Accelerate", "Transform"],
   ["Essentials", "Advanced", "Enterprise Plus"],
   ["Launch", "Grow", "Dominate"],
+  ["Hobby", "Business", "Enterprise"],
+  ["Individual", "Team", "Organization"],
+  ["Core", "Plus", "Max"],
+  ["Starter", "Professional", "Enterprise"],
+  ["Personal", "Team", "Business"],
+  ["Free", "Growth", "Scale"],
+  ["Seed", "Series A", "Unicorn"],
 ];
 
 export const PRICING_AMOUNTS = [
   [0, 29, 99], [0, 39, 149], [0, 49, 199],
   [9, 49, 149], [12, 59, 199], [15, 79, 249],
   [19, 69, 179], [0, 45, 129],
+  [7, 35, 119], [14, 55, 169], [0, 25, 89],
+  [29, 79, 249], [0, 19, 79], [5, 29, 99],
+  [0, 42, 159],
 ];
 
 export const LAYOUT_VARIANTS = [
   "hero-left", "hero-center", "hero-split", "hero-gradient",
   "hero-video-bg", "hero-minimal", "hero-bold", "hero-card",
+  "hero-diagonal", "hero-overlap", "hero-wave", "hero-dark",
+  "hero-glass", "hero-grid", "hero-float", "hero-stack",
 ];
 
 export const SECTION_POOLS = [
   "hero", "features", "how-it-works", "testimonials", "pricing",
   "faq", "cta", "stats", "team", "integrations",
+  "case-studies", "comparison", "timeline", "partners",
 ];
 
 export const PALETTES = [
@@ -267,23 +455,42 @@ export const PALETTES = [
   { name: "Indigo Night", primary: "#283593", secondary: "#3949AB", accent: "#9FA8DA", bg: "#F3F4FA", text: "#1A237E" },
   { name: "Sage Garden", primary: "#6B8E7B", secondary: "#8FBC8F", accent: "#C8E6C9", bg: "#F1F8F2", text: "#2E4A3A" },
   { name: "Copper Wire", primary: "#BF5700", secondary: "#D4770C", accent: "#F0C27F", bg: "#FFF9F0", text: "#3B1C00" },
+  { name: "Nordic Ice", primary: "#5B86E5", secondary: "#36D1DC", accent: "#C2E9FB", bg: "#F0F7FF", text: "#1A365D" },
+  { name: "Volcanic", primary: "#D32F2F", secondary: "#FF5722", accent: "#FFCCBC", bg: "#FFF3F0", text: "#3E1A12" },
+  { name: "Emerald City", primary: "#00695C", secondary: "#26A69A", accent: "#B2DFDB", bg: "#F0FBF8", text: "#004D40" },
+  { name: "Lavender Fields", primary: "#7E57C2", secondary: "#9575CD", accent: "#D1C4E9", bg: "#F5F0FF", text: "#311B92" },
+  { name: "Titanium", primary: "#455A64", secondary: "#78909C", accent: "#CFD8DC", bg: "#F5F7F8", text: "#263238" },
+  { name: "Golden Hour", primary: "#F57F17", secondary: "#FDD835", accent: "#FFF9C4", bg: "#FFFDF0", text: "#4A3800" },
+  { name: "Cherry Blossom", primary: "#D81B60", secondary: "#EC407A", accent: "#F8BBD0", bg: "#FFF0F5", text: "#4A0E29" },
+  { name: "Spruce", primary: "#2E7D32", secondary: "#66BB6A", accent: "#A5D6A7", bg: "#F1F8E9", text: "#1B5E20" },
+  { name: "Twilight", primary: "#4527A0", secondary: "#651FFF", accent: "#B388FF", bg: "#F3EDFF", text: "#1A0063" },
+  { name: "Sandstone", primary: "#A67C52", secondary: "#C9A96E", accent: "#E8D5B7", bg: "#FDF8F0", text: "#5D4037" },
+  { name: "Pacific Blue", primary: "#0277BD", secondary: "#039BE5", accent: "#81D4FA", bg: "#F0F9FF", text: "#01579B" },
+  { name: "Moss Agate", primary: "#558B2F", secondary: "#8BC34A", accent: "#DCEDC8", bg: "#F4FAF0", text: "#33691E" },
+  { name: "Desert Rose", primary: "#AD5D50", secondary: "#D4796A", accent: "#E8C3BA", bg: "#FFF5F2", text: "#5D2E24" },
+  { name: "Charcoal", primary: "#37474F", secondary: "#546E7A", accent: "#90A4AE", bg: "#F5F6F7", text: "#263238" },
+  { name: "Marigold", primary: "#E65100", secondary: "#FB8C00", accent: "#FFE0B2", bg: "#FFF8F0", text: "#4E2700" },
 ];
 
 export const ABOUT_TEMPLATES = [
   "Founded in {year}, {name} was born from a simple observation: {problem}. Our founder, {founder}, spent years in the {industry} space and saw firsthand how {audience} were underserved by existing solutions.\n\nWe built {name} to change that. Our platform combines {tech1} with {tech2} to deliver a solution that's both powerful and delightfully simple to use.\n\nToday, {name} serves thousands of {audience} across {count} countries, helping them {outcome}. We're backed by a passionate team of {teamSize} people spread across {cities} cities, united by a belief that {belief}.\n\nOur mission is clear: {mission}.",
   "The story of {name} begins with frustration. {founder}, a veteran of the {industry} world, grew tired of watching {audience} struggle with {problem}.\n\nSo they built something better. {name} launched in {year} with a radical premise: that {belief}. Since then, we've grown from a scrappy two-person team to a company of {teamSize}, serving {audience} in {count} countries.\n\nOur approach is different. We don't just build software—we build partnerships. Every feature in {name} was designed in collaboration with the {audience} who use it daily.\n\nWe're just getting started. The future of {industry} is being written right now, and we're holding the pen.",
+  "What if {domain} could be as intuitive as the consumer apps you love? That's the question {founder} asked in {year}, and {name} was born.\n\nOur team of {teamSize} engineers, designers, and {domain} experts works tirelessly to make sure {audience} have the tools they need to {outcome}. We combine {tech1} and {tech2} to create experiences that feel magical.\n\nBased in {cities} cities across {count} countries, we serve thousands of {audience} who trust {name} to power their most critical workflows.\n\nOur promise: {belief}. Always.",
+  "{name} exists because {founder} believed that {audience} deserve better tools. After {years} years in the {industry} space, they saw how much potential was being wasted on {pain}.\n\nSo in {year}, they assembled a team of {teamSize} passionate builders and launched {name}. Today, we power workflows for {audience} in {count} countries.\n\nOur secret? We obsess over the details. Every pixel, every API call, every notification has been designed to help you {outcome}. Powered by {tech1} and {tech2}, {name} adapts to how you work—not the other way around.",
 ];
 
 export const CONTACT_TEMPLATES = [
   "We'd love to hear from you. Whether you have a question about features, pricing, or anything else, our team is ready to answer all your questions.\n\nReach out and we'll respond within 24 hours.",
   "Got questions? We've got answers. Our team is available to help you make the most of {name}.\n\nFill out the form below and a real human will get back to you promptly—usually within a few hours during business days.",
   "Ready to transform your {domain}? Let's talk. Drop us a message and we'll be in touch faster than you can say '{tagline}'.\n\nWe believe in real conversations, not chatbot runarounds.",
+  "Let's start a conversation. Whether you're evaluating {name} for your team or you're already a customer looking for help, we're here.\n\nOur team responds within 4 business hours—because we know your time matters.",
+  "Have a question, idea, or just want to say hi? We love hearing from {audience}.\n\nDrop us a line and our team will get back to you within one business day. No ticket numbers, no bots—just real people who care.",
 ];
 
-export const YEARS = ["2021", "2022", "2023", "2024"];
-export const TEAM_SIZES = ["12", "18", "25", "35", "48", "60", "85"];
-export const COUNTRY_COUNTS = ["15", "28", "42", "56", "73"];
-export const CITY_COUNTS = ["3", "5", "7", "10"];
+export const YEARS = ["2020", "2021", "2022", "2023", "2024", "2025"];
+export const TEAM_SIZES = ["8", "12", "18", "25", "35", "48", "60", "85", "120", "200"];
+export const COUNTRY_COUNTS = ["12", "15", "28", "42", "56", "73", "90"];
+export const CITY_COUNTS = ["3", "5", "7", "10", "14"];
 
 export const BELIEFS = [
   "technology should empower, not complicate",
@@ -292,6 +499,10 @@ export const BELIEFS = [
   "simplicity and power aren't mutually exclusive",
   "great software should feel like a trusted colleague",
   "innovation happens when barriers are removed",
+  "the future belongs to those who build it",
+  "work should be fulfilling, not frustrating",
+  "data should inform decisions, not overwhelm them",
+  "the right tool makes the impossible routine",
 ];
 
 export const MISSIONS = [
@@ -300,13 +511,18 @@ export const MISSIONS = [
   "give every {audience} member the tools to succeed",
   "transform {domain} from a cost center into a growth engine",
   "prove that powerful software can also be beautiful and simple",
+  "democratize access to {domain} intelligence for teams of all sizes",
+  "build the infrastructure that powers the next generation of {audience}",
+  "free {audience} from busy work so they can focus on meaningful impact",
 ];
 
 export const TECHS = [
   "cutting-edge AI", "real-time analytics", "cloud-native architecture",
   "machine learning", "natural language processing", "advanced encryption",
   "behavioral analytics", "predictive modeling", "smart automation",
-  "edge computing",
+  "edge computing", "distributed systems", "event-driven architecture",
+  "graph databases", "containerized microservices", "serverless computing",
+  "zero-trust security", "federated learning", "stream processing",
 ];
 
 export const HOW_IT_WORKS_STEPS = [
@@ -320,17 +536,26 @@ export const HOW_IT_WORKS_STEPS = [
   { title: "Launch and Scale", desc: "Go live with confidence—our platform grows with you, from startup to enterprise." },
   { title: "Analyze and Optimize", desc: "Use built-in analytics to continuously improve your processes and outcomes." },
   { title: "Automate Repetitive Work", desc: "Set up intelligent workflows that handle routine tasks while you focus on strategy." },
+  { title: "Design Your Workflow", desc: "Use our visual builder to map out exactly how work should flow through your team." },
+  { title: "Monitor Everything", desc: "Get a bird's-eye view of all activity with real-time dashboards and alerts." },
+  { title: "Train Your AI", desc: "Feed the system your preferences and watch it learn to anticipate your needs." },
+  { title: "Deploy Anywhere", desc: "Push your configurations to cloud, on-premise, or hybrid environments in one click." },
+  { title: "Measure Impact", desc: "Track ROI with automatic before-and-after comparisons across all your key metrics." },
 ];
 
 export const TESTIMONIAL_NAMES = [
   "Sarah Mitchell", "David Park", "Maria Gonzalez", "James Okonkwo",
   "Emily Tanaka", "Raj Mehta", "Lise Bergman", "Carlos Rivera",
+  "Anna Fischer", "Tom Wilson", "Priya Sharma", "Marcus Johnson",
+  "Li Wei", "Sophie Laurent", "Ahmed Hassan", "Clara Olsen",
 ];
 
 export const TESTIMONIAL_ROLES = [
   "VP of Operations", "Head of Product", "Director of Engineering",
   "Chief Revenue Officer", "Head of Growth", "Operations Manager",
-  "Senior Analyst", "Team Lead",
+  "Senior Analyst", "Team Lead", "CTO", "VP of Marketing",
+  "Director of Sales", "Head of Customer Success", "COO",
+  "Director of Strategy", "Head of Data", "VP of People",
 ];
 
 export const TESTIMONIALS = [
@@ -342,4 +567,19 @@ export const TESTIMONIALS = [
   "We saved over $50K in the first quarter just by consolidating our tools into this one platform.",
   "The customer support team is incredible. They feel like an extension of our own organization.",
   "This tool didn't just improve our workflow—it transformed how we think about our entire operation.",
+  "Within two weeks, we saw a 3x improvement in team response times. The ROI speaks for itself.",
+  "I was skeptical at first, but the results are undeniable. Our productivity has never been higher.",
+  "This is the tool I wish existed five years ago. It would have saved us thousands of hours.",
+  "Our customers have noticed the difference. Response times are down, satisfaction scores are up.",
+  "The integration ecosystem is phenomenal. We connected all our tools in an afternoon.",
+  "What impressed me most is how intuitive it is. Zero training needed—my team just started using it.",
+  "We evaluated 15 competitors before choosing this platform. Best decision we've made in years.",
+  "The analytics alone are worth the price. We're making decisions we never could have made before.",
+];
+
+export const DESIRES = [
+  "demand results", "value their time", "refuse to settle",
+  "think big", "move fast", "expect excellence",
+  "lead the way", "break boundaries", "choose quality",
+  "prioritize impact",
 ];
