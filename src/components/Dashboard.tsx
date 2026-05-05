@@ -23,9 +23,15 @@ export default function Dashboard() {
   const [generating, setGenerating] = useState(false);
 
   const fetchGenerations = useCallback(async () => {
-    const res = await fetch("/api/generations");
-    const data = await res.json();
-    setGenerations(data);
+    try {
+      const res = await fetch("/api/generations");
+      if (res.ok) {
+        const data = await res.json();
+        setGenerations(data);
+      }
+    } catch {
+      // silently handle
+    }
     setLoading(false);
   }, []);
 
