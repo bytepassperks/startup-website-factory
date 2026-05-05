@@ -1,0 +1,73 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Generation {
+  id                 String   @id @default(cuid())
+  seed               String
+  createdAt          DateTime @default(now())
+  startupName        String
+  domainSuggestion   String
+  founderName        String
+  founderRole        String
+  founderBio         String   @db.Text
+  founderEmailPattern String
+  category           String
+  targetAudience     String
+  problem            String   @db.Text
+  solution           String   @db.Text
+  tagline            String
+  heroHeadline       String
+  heroSubheadline    String   @db.Text
+  featureList        Json
+  faqItems           Json
+  pricingTiers       Json
+  aboutCopy          String   @db.Text
+  contactCopy        String   @db.Text
+  seoMeta            Json
+  imageQueries       Json
+  selectedImages     Json
+  palette            Json
+  layoutVariant      String
+  sectionOrder       Json
+  fullGeneratedCopy  Json
+  uniquenessScores   Json?
+  nearestMatches     Json?
+  deploymentStatus   String   @default("draft")
+  mailgunStatus      String   @default("not_configured")
+  archived           Boolean  @default(false)
+
+  matches GenerationMatch[]
+}
+
+model GenerationMatch {
+  id            String     @id @default(cuid())
+  generationId  String
+  matchedWithId String
+  field         String
+  score         Float
+  explanation   String
+  generation    Generation @relation(fields: [generationId], references: [id], onDelete: Cascade)
+}
+
+model SiteSettings {
+  id              String  @id @default("default")
+  purchasedDomain String?
+  sendingSubdomain String?
+  mailgunSetup    Boolean @default(false)
+  renderDeployUrl String?
+}
+
+model DeploymentRecord {
+  id           String   @id @default(cuid())
+  generationId String
+  deployedAt   DateTime @default(now())
+  renderUrl    String?
+  status       String   @default("pending")
+  logs         String?  @db.Text
+}
