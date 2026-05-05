@@ -11,6 +11,7 @@ interface Generation {
   deploymentStatus: string;
   mailgunStatus: string;
   archived: boolean;
+  purchasedDomain: string | null;
   uniquenessScores: { overallScore: number; isUnique: boolean; generationMethod?: string } | null;
   nearestMatches: { id: string; score: number }[] | null;
 }
@@ -91,12 +92,23 @@ export default function GenerationCard({
         >
           Configure
         </Link>
-        <button
-          onClick={() => onDeploy(gen.id)}
-          className="px-3 py-1.5 text-xs font-medium bg-emerald-600 text-white rounded-lg hover:bg-emerald-500 transition-colors"
-        >
-          Deploy
-        </button>
+        {gen.deploymentStatus === "deployed" && gen.purchasedDomain ? (
+          <a
+            href={`https://${gen.purchasedDomain}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="px-3 py-1.5 text-xs font-medium bg-emerald-600 text-white rounded-lg hover:bg-emerald-500 transition-colors"
+          >
+            Visit Live Site
+          </a>
+        ) : (
+          <button
+            onClick={() => onDeploy(gen.id)}
+            className="px-3 py-1.5 text-xs font-medium bg-emerald-600 text-white rounded-lg hover:bg-emerald-500 transition-colors"
+          >
+            Deploy
+          </button>
+        )}
         <button
           onClick={() => onArchive(gen.id)}
           className="px-3 py-1.5 text-xs font-medium bg-white border border-red-300 text-red-600 rounded-lg hover:bg-red-50 transition-colors"
