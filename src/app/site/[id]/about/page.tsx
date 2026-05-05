@@ -1,5 +1,6 @@
 import { getSiteData } from "@/lib/site-data";
 import { getLayoutConfig } from "@/lib/layout-config";
+import { getBasePath } from "@/lib/site-href";
 import { notFound } from "next/navigation";
 import SiteNav from "@/components/SiteNav";
 import SiteFooter from "@/components/SiteFooter";
@@ -12,12 +13,13 @@ export default async function AboutPage({ params }: { params: Promise<{ id: stri
 
   const { palette, selectedImages } = site;
   const lc = getLayoutConfig(site.layoutVariant);
+  const basePath = await getBasePath(id);
   const founderImg = selectedImages[1]?.url;
   const isCard = lc.heroStyle === "center" || lc.heroStyle === "glass";
 
   return (
     <div style={{ backgroundColor: palette.bg, color: palette.text }}>
-      <SiteNav id={id} name={site.startupName} palette={palette} />
+      <SiteNav name={site.startupName} palette={palette} basePath={basePath} />
 
       {/* About Hero */}
       <section className="relative overflow-hidden" style={{ backgroundColor: palette.primary }}>
@@ -85,7 +87,7 @@ export default async function AboutPage({ params }: { params: Promise<{ id: stri
         </div>
       </section>
 
-      <SiteFooter id={id} name={site.startupName} palette={palette} />
+      <SiteFooter name={site.startupName} palette={palette} basePath={basePath} />
       <ScrollAnimator />
     </div>
   );

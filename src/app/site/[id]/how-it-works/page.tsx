@@ -1,5 +1,6 @@
 import { getSiteData } from "@/lib/site-data";
 import { getLayoutConfig } from "@/lib/layout-config";
+import { getBasePath } from "@/lib/site-href";
 import { notFound } from "next/navigation";
 import SiteNav from "@/components/SiteNav";
 import SiteFooter from "@/components/SiteFooter";
@@ -15,10 +16,11 @@ export default async function HowItWorksPage({ params }: { params: Promise<{ id:
   const steps = (site.fullGeneratedCopy.howItWorks || []) as { title: string; desc: string }[];
   const lc = getLayoutConfig(site.layoutVariant);
   const isAlt = lc.featureStyle === "alternating" || lc.featureStyle === "list";
+  const basePath = await getBasePath(id);
 
   return (
     <div style={{ backgroundColor: palette.bg, color: palette.text }}>
-      <SiteNav id={id} name={site.startupName} palette={palette} />
+      <SiteNav name={site.startupName} palette={palette} basePath={basePath} />
 
       <section className={lc.sectionSpacing}>
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -68,7 +70,7 @@ export default async function HowItWorksPage({ params }: { params: Promise<{ id:
           )}
 
           <div className={`text-center mt-16 ${lc.animClass}`}>
-            <Link href={`/site/${id}/pricing`}
+            <Link href={`${basePath}/pricing`}
               className={`inline-block px-8 py-3 ${lc.borderRadius} font-semibold text-white transition-transform hover:scale-105`}
               style={{ backgroundColor: palette.primary }}>
               Start Your Journey
@@ -77,7 +79,7 @@ export default async function HowItWorksPage({ params }: { params: Promise<{ id:
         </div>
       </section>
 
-      <SiteFooter id={id} name={site.startupName} palette={palette} />
+      <SiteFooter name={site.startupName} palette={palette} basePath={basePath} />
       <ScrollAnimator />
     </div>
   );

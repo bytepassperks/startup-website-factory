@@ -1,5 +1,6 @@
 import { getSiteData } from "@/lib/site-data";
 import { getLayoutConfig } from "@/lib/layout-config";
+import { getBasePath } from "@/lib/site-href";
 import { notFound } from "next/navigation";
 import SiteNav from "@/components/SiteNav";
 import SiteFooter from "@/components/SiteFooter";
@@ -13,10 +14,11 @@ export default async function PricingPage({ params }: { params: Promise<{ id: st
 
   const { palette, pricingTiers } = site;
   const lc = getLayoutConfig(site.layoutVariant);
+  const basePath = await getBasePath(id);
 
   return (
     <div style={{ backgroundColor: palette.bg, color: palette.text }}>
-      <SiteNav id={id} name={site.startupName} palette={palette} />
+      <SiteNav name={site.startupName} palette={palette} basePath={basePath} />
 
       <section className={lc.sectionSpacing}>
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -46,7 +48,7 @@ export default async function PricingPage({ params }: { params: Promise<{ id: st
                       </li>
                     ))}
                   </ul>
-                  <Link href={`/site/${id}/contact`}
+                  <Link href={`${basePath}/contact`}
                     className={`px-6 py-2.5 ${lc.borderRadius} font-semibold text-sm whitespace-nowrap`}
                     style={i === 1 ? { backgroundColor: palette.primary, color: "#fff" } : { border: `2px solid ${palette.primary}`, color: palette.primary }}>
                     {tier.price === 0 ? "Get Started Free" : "Start Free Trial"}
@@ -78,7 +80,7 @@ export default async function PricingPage({ params }: { params: Promise<{ id: st
                       </li>
                     ))}
                   </ul>
-                  <Link href={`/site/${id}/contact`}
+                  <Link href={`${basePath}/contact`}
                     className={`block w-full text-center py-3 ${lc.borderRadius} font-semibold text-sm transition-colors`}
                     style={i === 1 ? { backgroundColor: palette.primary, color: "#fff" } : { border: `2px solid ${palette.primary}`, color: palette.primary }}>
                     {tier.price === 0 ? "Get Started Free" : "Start Free Trial"}
@@ -94,7 +96,7 @@ export default async function PricingPage({ params }: { params: Promise<{ id: st
         </div>
       </section>
 
-      <SiteFooter id={id} name={site.startupName} palette={palette} />
+      <SiteFooter name={site.startupName} palette={palette} basePath={basePath} />
       <ScrollAnimator />
     </div>
   );

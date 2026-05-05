@@ -1,4 +1,5 @@
 import { getSiteData } from "@/lib/site-data";
+import { getBasePath } from "@/lib/site-href";
 import { notFound } from "next/navigation";
 import SiteNav from "@/components/SiteNav";
 import SiteFooter from "@/components/SiteFooter";
@@ -9,11 +10,12 @@ export default async function PrivacyPage({ params }: { params: Promise<{ id: st
   if (!site) notFound();
 
   const { palette } = site;
+  const basePath = await getBasePath(id);
   const privacy = (site.fullGeneratedCopy.privacyPolicy as string) || "";
 
   return (
     <div style={{ backgroundColor: palette.bg, color: palette.text }}>
-      <SiteNav id={id} name={site.startupName} palette={palette} />
+      <SiteNav name={site.startupName} palette={palette} basePath={basePath} />
 
       <section className="py-20">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -37,7 +39,7 @@ export default async function PrivacyPage({ params }: { params: Promise<{ id: st
         </div>
       </section>
 
-      <SiteFooter id={id} name={site.startupName} palette={palette} />
+      <SiteFooter name={site.startupName} palette={palette} basePath={basePath} />
     </div>
   );
 }

@@ -4,23 +4,25 @@ import Link from "next/link";
 import { useState } from "react";
 
 interface SiteNavProps {
-  id: string;
   name: string;
   palette: { primary: string; text: string; bg: string };
+  basePath: string;
 }
 
-export default function SiteNav({ id, name, palette }: SiteNavProps) {
+export default function SiteNav({ name, palette, basePath }: SiteNavProps) {
   const [menuOpen, setMenuOpen] = useState(false);
   const [dark, setDark] = useState(false);
 
+  const b = basePath;
+
   const links = [
-    { href: `/site/${id}`, label: "Home" },
-    { href: `/site/${id}/features`, label: "Features" },
-    { href: `/site/${id}/how-it-works`, label: "How It Works" },
-    { href: `/site/${id}/pricing`, label: "Pricing" },
-    { href: `/site/${id}/about`, label: "About" },
-    { href: `/site/${id}/contact`, label: "Contact" },
-    { href: `/site/${id}/faq`, label: "FAQ" },
+    { href: b || "/", label: "Home" },
+    { href: `${b}/features`, label: "Features" },
+    { href: `${b}/how-it-works`, label: "How It Works" },
+    { href: `${b}/pricing`, label: "Pricing" },
+    { href: `${b}/about`, label: "About" },
+    { href: `${b}/contact`, label: "Contact" },
+    { href: `${b}/faq`, label: "FAQ" },
   ];
 
   return (
@@ -30,7 +32,7 @@ export default function SiteNav({ id, name, palette }: SiteNavProps) {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
-          <Link href={`/site/${id}`} className="font-bold text-lg" style={{ color: dark ? "#fff" : palette.primary }}>
+          <Link href={b || "/"} className="font-bold text-lg" style={{ color: dark ? "#fff" : palette.primary }}>
             {name}
           </Link>
 
@@ -46,7 +48,7 @@ export default function SiteNav({ id, name, palette }: SiteNavProps) {
             >
               {dark ? "Light" : "Dark"}
             </button>
-            <Link href="/" className="text-xs text-gray-400 hover:text-gray-600">&larr; Factory</Link>
+            {basePath && <Link href="/" className="text-xs text-gray-400 hover:text-gray-600">&larr; Factory</Link>}
           </div>
 
           <button
