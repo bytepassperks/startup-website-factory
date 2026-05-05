@@ -7,6 +7,7 @@ export interface DomainConfig {
   mailgunDomain: string | null;
   mailgunFromEmail: string | null;
   mailgunToEmail: string | null;
+  mailgunApiKey: string | null;
   mailgunSetup: boolean;
 }
 
@@ -23,6 +24,7 @@ export async function getDomainConfig(generationId?: string): Promise<DomainConf
     mailgunDomain: gen?.mailgunDomain || settings?.mailgunDomain || null,
     mailgunFromEmail: gen?.mailgunFromEmail || settings?.mailgunFromEmail || null,
     mailgunToEmail: gen?.mailgunToEmail || settings?.mailgunToEmail || null,
+    mailgunApiKey: gen?.mailgunApiKey || null,
     mailgunSetup: gen?.mailgunSetup || settings?.mailgunSetup || false,
   };
 }

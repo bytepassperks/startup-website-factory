@@ -13,6 +13,8 @@ interface SiteConfig {
   gmailReplyTo: string | null;
   contactFormEmail: string | null;
   mailgunSetup: boolean;
+  hasMailgunApiKey?: boolean;
+  mailgunApiKeyMasked?: string | null;
 }
 
 export default function ConfigureForm({ generationId }: { generationId: string }) {
@@ -21,6 +23,8 @@ export default function ConfigureForm({ generationId }: { generationId: string }
   const [saved, setSaved] = useState(false);
   const [testingMail, setTestingMail] = useState(false);
   const [testResult, setTestResult] = useState<string | null>(null);
+  const [apiKeyInput, setApiKeyInput] = useState("");
+  const [apiKeyDirty, setApiKeyDirty] = useState(false);
 
   useEffect(() => {
     let cancelled = false;
@@ -33,11 +37,26 @@ export default function ConfigureForm({ generationId }: { generationId: string }
   const handleSave = async () => {
     if (!config) return;
     setSaving(true);
-    await fetch(`/api/generations/${generationId}/settings`, {
+
+    const payload: Record<string, unknown> = { ...config };
+    delete payload.hasMailgunApiKey;
+    delete payload.mailgunApiKeyMasked;
+    delete payload.startupName;
+    delete payload.domainSuggestion;
+
+    if (apiKeyDirty) {
+      payload.mailgunApiKey = apiKeyInput || null;
+    }
+
+    const res = await fetch(`/api/generations/${generationId}/settings`, {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(config),
+      body: JSON.stringify(payload),
     });
+    const data = await res.json();
+    setConfig(data);
+    setApiKeyInput("");
+    setApiKeyDirty(false);
     setSaving(false);
     setSaved(true);
     setTimeout(() => setSaved(false), 3000);
@@ -132,6 +151,42 @@ export default function ConfigureForm({ generationId }: { generationId: string }
             Per-site Mailgun settings. Leave blank to use the global defaults.
           </p>
           <div className="space-y-4">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Mailgun API Key</label>
+              {config.hasMailgunApiKey && !apiKeyDirty ? (
+                <div className="flex items-center gap-2">
+                  <div className="flex-1 border border-gray-300 rounded-lg px-3 py-2 text-sm bg-gray-50 text-gray-500 font-mono">
+                    {config.mailgunApiKeyMasked || "••••••••"}
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => { setApiKeyDirty(true); setApiKeyInput(""); }}
+                    className="px-3 py-2 text-sm font-medium text-indigo-600 border border-indigo-300 rounded-lg hover:bg-indigo-50"
+                  >
+                    Change
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => { setApiKeyDirty(true); setApiKeyInput(""); }}
+                    className="px-3 py-2 text-sm font-medium text-red-600 border border-red-300 rounded-lg hover:bg-red-50"
+                  >
+                    Remove
+                  </button>
+                </div>
+              ) : (
+                <input
+                  type="password"
+                  placeholder="Enter Mailgun API key..."
+                  value={apiKeyInput}
+                  onChange={(e) => { setApiKeyInput(e.target.value); setApiKeyDirty(true); }}
+                  className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 font-mono"
+                  autoComplete="off"
+                />
+              )}
+              <p className="text-xs text-gray-400 mt-1">
+                Optional. If set, this key will be used instead of the global Mailgun API key for this site. The key is stored encrypted and never exposed.
+              </p>
+            </div>
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">Mailgun Domain</label>
               <input
