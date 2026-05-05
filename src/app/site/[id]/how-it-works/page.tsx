@@ -6,6 +6,9 @@ import SiteNav from "@/components/SiteNav";
 import SiteFooter from "@/components/SiteFooter";
 import ScrollAnimator from "@/components/ScrollAnimator";
 import Link from "next/link";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = { title: "How It Works" };
 
 export default async function HowItWorksPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;

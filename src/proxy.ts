@@ -20,7 +20,8 @@ async function lookupDomain(domain: string): Promise<string | null> {
 }
 
 export async function proxy(request: NextRequest) {
-  const hostname = request.headers.get("host") || "";
+  const forwarded = request.headers.get("x-forwarded-host");
+  const hostname = forwarded || request.headers.get("host") || "";
   const host = hostname.split(":")[0];
 
   if (

@@ -5,6 +5,9 @@ import { notFound } from "next/navigation";
 import SiteNav from "@/components/SiteNav";
 import SiteFooter from "@/components/SiteFooter";
 import ScrollAnimator from "@/components/ScrollAnimator";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = { title: "Features" };
 
 export default async function FeaturesPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
