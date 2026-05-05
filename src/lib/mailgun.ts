@@ -1,3 +1,5 @@
+import { prisma } from "@/lib/db";
+
 interface ContactFormData {
   name: string;
   email: string;
@@ -9,6 +11,18 @@ interface ContactFormData {
 interface MailResult {
   success: boolean;
   error?: string;
+}
+
+async function getMailConfig() {
+  const settings = await prisma.siteSettings.findUnique({ where: { id: "default" } });
+
+  const apiKey = process.env.MAILGUN_API_KEY;
+  const domain = settings?.mailgunDomain || process.env.MAILGUN_DOMAIN;
+  const fromEmail = settings?.mailgunFromEmail || process.env.MAILGUN_FROM_EMAIL;
+  const toEmail = settings?.mailgunToEmail || process.env.MAILGUN_TO_EMAIL;
+  const replyTo = settings?.gmailReplyTo;
+
+  return { apiKey, domain, fromEmail, toEmail, replyTo };
 }
 
 export async function sendContactEmail(data: ContactFormData): Promise<MailResult> {
@@ -25,10 +39,7 @@ export async function sendContactEmail(data: ContactFormData): Promise<MailResul
     return { success: false, error: "Invalid email address" };
   }
 
-  const apiKey = process.env.MAILGUN_API_KEY;
-  const domain = process.env.MAILGUN_DOMAIN;
-  const fromEmail = process.env.MAILGUN_FROM_EMAIL;
-  const toEmail = process.env.MAILGUN_TO_EMAIL;
+  const { apiKey, domain, fromEmail, toEmail, replyTo } = await getMailConfig();
 
   if (!apiKey || !domain || !fromEmail || !toEmail) {
     return { success: false, error: "Mail service not configured" };
@@ -43,7 +54,7 @@ export async function sendContactEmail(data: ContactFormData): Promise<MailResul
       "text",
       `Name: ${data.name}\nEmail: ${data.email}\nCompany: ${data.company || "N/A"}\n\nMessage:\n${data.message}`
     );
-    formData.append("h:Reply-To", data.email);
+    formData.append("h:Reply-To", replyTo || data.email);
 
     const res = await fetch(`https://api.mailgun.net/v3/${domain}/messages`, {
       method: "POST",

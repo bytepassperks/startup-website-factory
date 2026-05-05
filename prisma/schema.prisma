@@ -56,11 +56,16 @@ model GenerationMatch {
 }
 
 model SiteSettings {
-  id              String  @id @default("default")
-  purchasedDomain String?
+  id               String  @id @default("default")
+  purchasedDomain  String?
   sendingSubdomain String?
-  mailgunSetup    Boolean @default(false)
-  renderDeployUrl String?
+  mailgunDomain    String?
+  mailgunFromEmail String?
+  mailgunToEmail   String?
+  gmailReplyTo     String?
+  contactFormEmail String?
+  mailgunSetup     Boolean @default(false)
+  renderDeployUrl  String?
 }
 
 model DeploymentRecord {

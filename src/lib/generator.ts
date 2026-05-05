@@ -91,7 +91,7 @@ export function generateSite(existingSeed?: string): GeneratedSite {
     .replace("{adverb2}", adv2)
     .replace("{audience}", targetAudience)
     .replace("{pain}", pain)
-    .replace("{desire}", "Demand More");
+    .replace("{desire}", pick(P.DESIRES, rng));
 
   const heroSubheadline = `${startupName} helps ${targetAudience} ${solution.charAt(0).toLowerCase() + solution.slice(1)}. Join thousands who've already made the switch.`;
 
@@ -128,13 +128,15 @@ export function generateSite(existingSeed?: string): GeneratedSite {
   const tech2 = pick(P.TECHS, rng);
 
   const aboutTemplate = pick(P.ABOUT_TEMPLATES, rng);
+  const yearsExp = String(Math.floor(rng() * 12) + 5);
   const aboutCopy = aboutTemplate
     .replace(/{name}/g, startupName)
     .replace("{year}", year)
+    .replace("{years}", yearsExp)
     .replace("{problem}", problem)
     .replace("{founder}", founderName)
-    .replace("{industry}", category)
-    .replace("{audience}", targetAudience)
+    .replace(/{industry}/g, category)
+    .replace(/{audience}/g, targetAudience)
     .replace("{tech1}", tech1)
     .replace("{tech2}", tech2)
     .replace("{count}", countryCount)
@@ -142,13 +144,16 @@ export function generateSite(existingSeed?: string): GeneratedSite {
     .replace("{cities}", cityCount)
     .replace("{belief}", belief)
     .replace("{mission}", mission)
-    .replace("{outcome}", outcome.toLowerCase());
+    .replace("{outcome}", outcome.toLowerCase())
+    .replace("{pain}", pain)
+    .replace("{domain}", category.toLowerCase());
 
   const contactTemplate = pick(P.CONTACT_TEMPLATES, rng);
   const contactCopy = contactTemplate
-    .replace("{name}", startupName)
-    .replace("{domain}", category.toLowerCase())
-    .replace("{tagline}", tagline);
+    .replace(/{name}/g, startupName)
+    .replace(/{domain}/g, category.toLowerCase())
+    .replace("{tagline}", tagline)
+    .replace("{audience}", targetAudience);
 
   const seoMeta = {
     title: `${startupName} — ${tagline}`,

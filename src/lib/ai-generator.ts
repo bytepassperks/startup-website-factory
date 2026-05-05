@@ -11,39 +11,67 @@ interface PageGridMessage {
   content: string;
 }
 
+const MAX_RETRIES = 3;
+const TIMEOUT_MS = 45000;
+
 async function callPageGrid(messages: PageGridMessage[], maxTokens = 4096): Promise<string | null> {
   const apiKey = process.env.PAGEGRID_API_KEY;
-  if (!apiKey) return null;
-
-  try {
-    const res = await fetch(PAGEGRID_API_URL, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "api-key": apiKey,
-      },
-      body: JSON.stringify({
-        model: "claude-sonnet-4-20250514",
-        max_tokens: maxTokens,
-        messages,
-      }),
-    });
-
-    if (!res.ok) {
-      console.error("PageGrid API error:", res.status, await res.text().catch(() => ""));
-      return null;
-    }
-
-    const data = await res.json();
-    const content = data?.content;
-    if (Array.isArray(content) && content.length > 0 && content[0].text) {
-      return content[0].text;
-    }
-    return null;
-  } catch (err) {
-    console.error("PageGrid call failed:", err);
+  if (!apiKey) {
+    console.warn("PAGEGRID_API_KEY not set, skipping AI generation");
     return null;
   }
+
+  for (let attempt = 1; attempt <= MAX_RETRIES; attempt++) {
+    try {
+      const controller = new AbortController();
+      const timeout = setTimeout(() => controller.abort(), TIMEOUT_MS);
+
+      const res = await fetch(PAGEGRID_API_URL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "api-key": apiKey,
+        },
+        body: JSON.stringify({
+          model: "claude-opus-4-6",
+          max_tokens: maxTokens,
+          messages,
+        }),
+        signal: controller.signal,
+      });
+
+      clearTimeout(timeout);
+
+      if (!res.ok) {
+        const errBody = await res.text().catch(() => "");
+        console.error(`PageGrid API error (attempt ${attempt}/${MAX_RETRIES}):`, res.status, errBody);
+        if (attempt < MAX_RETRIES) {
+          const delay = Math.pow(2, attempt) * 500;
+          await new Promise(r => setTimeout(r, delay));
+          continue;
+        }
+        return null;
+      }
+
+      const data = await res.json();
+      const content = data?.content;
+      if (Array.isArray(content) && content.length > 0 && content[0].text) {
+        return content[0].text;
+      }
+      console.error(`PageGrid returned unexpected response shape (attempt ${attempt})`);
+      return null;
+    } catch (err) {
+      const isTimeout = err instanceof DOMException && err.name === "AbortError";
+      console.error(`PageGrid call failed (attempt ${attempt}/${MAX_RETRIES}):`, isTimeout ? "Request timed out" : err);
+      if (attempt < MAX_RETRIES) {
+        const delay = Math.pow(2, attempt) * 500;
+        await new Promise(r => setTimeout(r, delay));
+        continue;
+      }
+      return null;
+    }
+  }
+  return null;
 }
 
 function buildExistingContext(existingNames: string[]): string {

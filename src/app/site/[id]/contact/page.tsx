@@ -1,4 +1,4 @@
-import { getSiteData } from "@/lib/site-data";
+import { getSiteData, getDomainConfig } from "@/lib/site-data";
 import { notFound } from "next/navigation";
 import SiteNav from "@/components/SiteNav";
 import SiteFooter from "@/components/SiteFooter";
@@ -6,10 +6,13 @@ import ContactForm from "@/components/ContactForm";
 
 export default async function ContactPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
-  const site = await getSiteData(id);
+  const [site, domainConfig] = await Promise.all([getSiteData(id), getDomainConfig()]);
   if (!site) notFound();
 
   const { palette } = site;
+
+  const displayDomain = domainConfig.purchasedDomain || site.domainSuggestion;
+  const displayEmail = domainConfig.contactFormEmail || site.founderEmailPattern;
 
   return (
     <div style={{ backgroundColor: palette.bg, color: palette.text }}>
@@ -29,11 +32,11 @@ export default async function ContactPage({ params }: { params: Promise<{ id: st
               <div className="space-y-4 text-sm text-gray-600">
                 <div className="flex items-center gap-3">
                   <span className="w-8 h-8 rounded-lg flex items-center justify-center text-white" style={{ backgroundColor: palette.primary }}>@</span>
-                  <span>{site.founderEmailPattern}</span>
+                  <span>{displayEmail}</span>
                 </div>
                 <div className="flex items-center gap-3">
                   <span className="w-8 h-8 rounded-lg flex items-center justify-center text-white" style={{ backgroundColor: palette.primary }}>&#x1F310;</span>
-                  <span>{site.domainSuggestion}</span>
+                  <span>{displayDomain}</span>
                 </div>
               </div>
             </div>

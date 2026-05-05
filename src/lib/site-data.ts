@@ -1,5 +1,22 @@
 import { prisma } from "./db";
 
+export interface DomainConfig {
+  purchasedDomain: string | null;
+  contactFormEmail: string | null;
+  gmailReplyTo: string | null;
+  mailgunSetup: boolean;
+}
+
+export async function getDomainConfig(): Promise<DomainConfig> {
+  const settings = await prisma.siteSettings.findUnique({ where: { id: "default" } });
+  return {
+    purchasedDomain: settings?.purchasedDomain || null,
+    contactFormEmail: settings?.contactFormEmail || null,
+    gmailReplyTo: settings?.gmailReplyTo || null,
+    mailgunSetup: settings?.mailgunSetup || false,
+  };
+}
+
 export interface SiteData {
   id: string;
   startupName: string;
